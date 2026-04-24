@@ -47,7 +47,7 @@ export default function Features() {
               key={f.title}
               className="group bg-white/5 border border-white/10 rounded-2xl p-6 hover:bg-white/10 hover:border-accent/40 transition-all duration-200 cursor-default"
             >
-              <div className="w-12 h-12 bg-accent/15 rounded-xl flex items-center justify-center text-2xl mb-5 group-hover:bg-accent/25 transition-colors duration-200">
+              <div className="icon-3d w-12 h-12 rounded-xl flex items-center justify-center text-2xl mb-5 group-hover:scale-110 transition-transform duration-200">
                 {f.icon}
               </div>
               <h3 className="text-base font-semibold text-white mb-2">{f.title}</h3>

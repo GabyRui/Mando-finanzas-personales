@@ -1,3 +1,5 @@
+import Mascot from '@/components/Mascot'
+
 const steps = [
   {
     number: '01',
@@ -21,9 +23,15 @@ export default function HowItWorks() {
     <section id="how" className="px-6 md:px-8 py-16 md:py-24 bg-surface">
       <div className="max-w-5xl mx-auto">
 
-        <h2 className="text-2xl md:text-3xl font-bold text-text-main text-center mb-12">
-          Así funciona
-        </h2>
+        <div className="flex flex-col items-center mb-12">
+          <Mascot className="mb-5" />
+          <h2 className="text-2xl md:text-3xl font-bold text-text-main text-center">
+            Así funciona
+          </h2>
+          <p className="text-text-muted text-sm font-normal text-center mt-2">
+            Tu asistente trabaja en segundo plano, tú no haces nada.
+          </p>
+        </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-10">
           {steps.map((step) => (

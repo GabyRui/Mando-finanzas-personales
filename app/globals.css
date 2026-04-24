@@ -15,6 +15,51 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+/* ── Mascota robot ─────────────────────────────────────── */
+
+@keyframes blink {
+  0%, 88%, 100% { transform: scaleY(1); }
+  93%            { transform: scaleY(0.07); }
+}
+
+@keyframes antenna-pulse {
+  0%, 100% { transform: scale(1);   opacity: 1;   }
+  50%       { transform: scale(1.5); opacity: 0.6; }
+}
+
+@keyframes ping-badge {
+  0%, 100% { transform: scale(1);   opacity: 1; }
+  50%       { transform: scale(1.6); opacity: 0; }
+}
+
+.robot-eye {
+  animation: blink 5s ease-in-out infinite;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.robot-antenna {
+  animation: antenna-pulse 2s ease-in-out infinite;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.robot-ping {
+  animation: ping-badge 1.8s ease-in-out infinite;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+/* ── Íconos 3D en Features ─────────────────────────────── */
+
+.icon-3d {
+  background: linear-gradient(145deg, rgba(23,198,83,0.38) 0%, rgba(10,110,45,0.18) 100%);
+  box-shadow:
+    3px 4px 10px rgba(0,0,0,0.4),
+    -1px -1px 4px rgba(255,255,255,0.06),
+    inset 0 1px 0 rgba(255,255,255,0.12);
+}
+
 /* Números decorativos en HowItWorks */
 .step-number {
   color: #17C653;
