@@ -51,7 +51,7 @@ function Pricing({
 }) {
   return (
     <div id="pricing">
-      <h2 className="text-2xl md:text-3xl font-semibold text-text-main text-center mb-3">
+      <h2 className="text-2xl md:text-3xl font-bold text-text-main text-center mb-3">
         Elige tu plan
       </h2>
       <p className="text-text-muted text-center text-sm mb-10">
@@ -64,10 +64,10 @@ function Pricing({
           return (
             <div
               key={plan.id}
-              className={`relative bg-surface rounded-2xl p-7 flex flex-col transition-all duration-150 ${
+              className={`relative bg-surface rounded-2xl p-7 flex flex-col transition-all duration-200 hover:-translate-y-1 ${
                 plan.highlight
-                  ? 'border-2 border-accent shadow-md'
-                  : 'border border-border'
+                  ? 'border-2 border-accent shadow-lg shadow-accent/10'
+                  : 'border border-border hover:shadow-md'
               } ${isSelected ? 'ring-2 ring-accent ring-offset-2' : ''}`}
             >
               {/* Badge */}
@@ -142,7 +142,7 @@ function WaitlistForm({ selectedPlan }: { selectedPlan: string | null }) {
 
   return (
     <div id="waitlist-form" className="max-w-lg mx-auto mt-16">
-      <h2 className="text-2xl md:text-3xl font-semibold text-text-main text-center mb-2">
+      <h2 className="text-2xl md:text-3xl font-bold text-text-main text-center mb-2">
         Únete a la lista de espera
       </h2>
 
@@ -211,7 +211,7 @@ export default function PricingAndForm() {
   }
 
   return (
-    <section className="px-6 md:px-8 py-16 md:py-24 border-t border-border">
+    <section className="px-6 md:px-8 py-16 md:py-24 bg-highlight">
       <div className="max-w-5xl mx-auto">
         <Pricing selectedPlan={selectedPlan} onSelect={handleSelect} />
         <WaitlistForm selectedPlan={selectedPlan} />

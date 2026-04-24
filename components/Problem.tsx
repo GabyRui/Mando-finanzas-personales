@@ -18,10 +18,10 @@ const pains = [
 
 export default function Problem() {
   return (
-    <section className="px-6 md:px-8 py-16 md:py-24 border-t border-border">
+    <section className="px-6 md:px-8 py-16 md:py-24 bg-surface">
       <div className="max-w-5xl mx-auto">
 
-        <h2 className="text-2xl md:text-3xl font-semibold text-text-main text-center mb-12">
+        <h2 className="text-2xl md:text-3xl font-bold text-text-main text-center mb-12">
           ¿Te suena familiar?
         </h2>
 
@@ -29,7 +29,7 @@ export default function Problem() {
           {pains.map((pain) => (
             <div
               key={pain.title}
-              className="bg-surface border border-border rounded-xl p-6"
+              className="bg-surface border border-border rounded-xl p-6 hover:-translate-y-1 hover:shadow-lg hover:border-navy/20 transition-all duration-200 cursor-default"
             >
               <div className="text-3xl mb-4">{pain.icon}</div>
               <h3 className="text-base font-semibold text-text-main mb-2">

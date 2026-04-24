@@ -4,13 +4,13 @@
 
 html {
   scroll-behavior: smooth;
-  background-color: #F9F8F6;
+  background-color: #F5F7FA;
 }
 
 body {
-  background-color: #F9F8F6;
-  color: #1A1A1A;
-  font-family: 'Inter', system-ui, sans-serif;
+  background-color: #F5F7FA;
+  color: #1A2540;
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
 }
 

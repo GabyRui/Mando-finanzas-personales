@@ -8,17 +8,28 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        bg: '#F9F8F6',
+        bg: '#F5F7FA',
         surface: '#FFFFFF',
-        'text-main': '#1A1A1A',
+        navy: '#1A2540',
+        gold: '#C9A760',
+        'text-main': '#1A2540',
         'text-muted': '#6B7280',
-        accent: '#2563EB',
-        'accent-hover': '#1D4ED8',
-        border: '#E5E7EB',
-        highlight: '#EFF6FF',
+        accent: '#22C55E',
+        'accent-hover': '#16A34A',
+        border: '#E2E8F0',
+        highlight: '#F0FDF4',
       },
       fontFamily: {
-        sans: ['var(--font-inter)', 'system-ui', 'sans-serif'],
+        sans: ['var(--font-display)', 'system-ui', 'sans-serif'],
+      },
+      animation: {
+        float: 'float 4s ease-in-out infinite',
+      },
+      keyframes: {
+        float: {
+          '0%, 100%': { transform: 'translateY(0px)' },
+          '50%': { transform: 'translateY(-14px)' },
+        },
       },
     },
   },
