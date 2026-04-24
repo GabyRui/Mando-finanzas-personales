@@ -18,12 +18,12 @@ export default function Navbar() {
           <a href="#faq" className="hover:text-text-main transition-colors">FAQ</a>
         </nav>
 
-        <a
-          href="#pricing"
+        <button
+          onClick={() => window.dispatchEvent(new Event('open-waitlist'))}
           className="hidden md:inline-block bg-accent hover:bg-accent-hover text-white text-sm font-semibold px-5 py-2 rounded-lg transition-colors"
         >
           Quiero acceso
-        </a>
+        </button>
 
         <button
           className="md:hidden text-text-muted text-xl"
@@ -39,13 +39,12 @@ export default function Navbar() {
           <a href="#how" className="text-text-muted hover:text-text-main" onClick={() => setOpen(false)}>Cómo funciona</a>
           <a href="#pricing" className="text-text-muted hover:text-text-main" onClick={() => setOpen(false)}>Planes</a>
           <a href="#faq" className="text-text-muted hover:text-text-main" onClick={() => setOpen(false)}>FAQ</a>
-          <a
-            href="#pricing"
-            className="bg-accent hover:bg-accent-hover text-white text-center font-semibold py-2.5 rounded-lg transition-colors"
-            onClick={() => setOpen(false)}
+          <button
+            onClick={() => { window.dispatchEvent(new Event('open-waitlist')); setOpen(false) }}
+            className="bg-accent hover:bg-accent-hover text-white text-center font-semibold py-2.5 rounded-lg transition-colors w-full"
           >
             Quiero acceso
-          </a>
+          </button>
         </div>
       )}
     </header>

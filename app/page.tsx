@@ -7,6 +7,7 @@ import HowItWorks from '@/components/HowItWorks'
 import PricingAndForm from '@/components/PricingAndForm'
 import FAQ from '@/components/FAQ'
 import Footer from '@/components/Footer'
+import WaitlistModal from '@/components/WaitlistModal'
 
 export default function Home() {
   return (
@@ -22,6 +23,7 @@ export default function Home() {
         <FAQ />
         <Footer />
       </main>
+      <WaitlistModal />
     </>
   )
 }

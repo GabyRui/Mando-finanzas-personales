@@ -4,14 +4,21 @@
 
 html {
   scroll-behavior: smooth;
-  background-color: #F5F7FA;
+  background-color: #E9EFF8;
 }
 
 body {
-  background-color: #F5F7FA;
+  background-color: #E9EFF8;
   color: #1A2540;
+
   font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
+}
+
+/* Números decorativos en HowItWorks */
+.step-number {
+  color: #17C653;
+  opacity: 0.65;
 }
 
 /* Accordion animation */

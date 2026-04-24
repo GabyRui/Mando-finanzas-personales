@@ -33,20 +33,25 @@ const features = [
 
 export default function Features() {
   return (
-    <section id="features" className="px-6 md:px-8 py-16 md:py-24 bg-bg">
+    <section id="features" className="px-6 md:px-8 py-16 md:py-24 bg-navy">
       <div className="max-w-5xl mx-auto">
-        <h2 className="text-2xl md:text-3xl font-bold text-text-main text-center mb-3">
+        <h2 className="text-2xl md:text-3xl font-bold text-white text-center mb-3">
           Todo lo que necesitas. Nada de lo que no.
         </h2>
-        <p className="text-text-muted font-normal text-center text-sm mb-12 max-w-xl mx-auto">
+        <p className="text-white/50 font-normal text-center text-sm mb-12 max-w-xl mx-auto">
           Mando hace una sola cosa bien: registra tus gastos sin que tengas que pensar en ello.
         </p>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
           {features.map((f) => (
-            <div key={f.title} className="bg-surface border border-border rounded-xl p-6 hover:-translate-y-1 hover:shadow-lg hover:border-accent/30 transition-all duration-200 cursor-default">
-              <div className="text-3xl mb-4">{f.icon}</div>
-              <h3 className="text-base font-semibold text-text-main mb-2">{f.title}</h3>
-              <p className="text-text-muted font-normal text-sm leading-relaxed">{f.body}</p>
+            <div
+              key={f.title}
+              className="group bg-white/5 border border-white/10 rounded-2xl p-6 hover:bg-white/10 hover:border-accent/40 transition-all duration-200 cursor-default"
+            >
+              <div className="w-12 h-12 bg-accent/15 rounded-xl flex items-center justify-center text-2xl mb-5 group-hover:bg-accent/25 transition-colors duration-200">
+                {f.icon}
+              </div>
+              <h3 className="text-base font-semibold text-white mb-2">{f.title}</h3>
+              <p className="text-white/55 font-normal text-sm leading-relaxed">{f.body}</p>
             </div>
           ))}
         </div>

@@ -29,8 +29,9 @@ export default function Problem() {
           {pains.map((pain) => (
             <div
               key={pain.title}
-              className="bg-surface border border-border rounded-xl p-6 hover:-translate-y-1 hover:shadow-lg hover:border-navy/20 transition-all duration-200 cursor-default"
+              className="relative bg-surface border border-border rounded-2xl p-6 overflow-hidden hover:-translate-y-1 hover:shadow-xl hover:border-accent/30 transition-all duration-200 cursor-default"
             >
+              <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-accent/70 via-accent/30 to-transparent" />
               <div className="text-3xl mb-4">{pain.icon}</div>
               <h3 className="text-base font-semibold text-text-main mb-2">
                 {pain.title}

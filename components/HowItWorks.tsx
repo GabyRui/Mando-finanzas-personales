@@ -28,7 +28,7 @@ export default function HowItWorks() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-10">
           {steps.map((step) => (
             <div key={step.number} className="relative">
-              <div className="text-7xl font-bold text-accent/20 leading-none mb-4 select-none">
+              <div className="step-number text-7xl font-bold leading-none mb-4 select-none">
                 {step.number}
               </div>
               <h3 className="text-lg font-semibold text-text-main mb-2">

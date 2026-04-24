@@ -1,4 +1,10 @@
+'use client'
+
 import Image from 'next/image'
+
+function openWaitlist() {
+  window.dispatchEvent(new Event('open-waitlist'))
+}
 
 export default function Hero() {
   return (
@@ -26,12 +32,12 @@ export default function Hero() {
             Sin Excel. Sin ingresar datos. Sin culpa de fin de mes.
           </p>
 
-          <a
-            href="#pricing"
-            className="inline-block bg-accent hover:bg-accent-hover text-white font-bold text-base px-8 py-4 rounded-xl transition-colors duration-150 shadow-lg shadow-accent/20"
+          <button
+            onClick={openWaitlist}
+            className="bg-accent hover:bg-accent-hover text-white font-bold text-base px-8 py-4 rounded-xl transition-colors duration-150 shadow-lg shadow-accent/20"
           >
             Quiero acceso anticipado
-          </a>
+          </button>
 
           <p className="mt-6 text-sm text-white/40 font-normal">
             🔒 127 personas ya en lista de espera
