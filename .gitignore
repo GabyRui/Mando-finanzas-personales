@@ -19,3 +19,8 @@ npm-debug.log*
 # TypeScript
 *.tsbuildinfo
 next-env.d.ts
+
+# mando-app build artifacts
+mando-app/.next/
+mando-app/node_modules/
+mando-app/next-env.d.ts

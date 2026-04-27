@@ -1,0 +1,76 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html, body {
+  background-color: #1A2540;
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overflow: hidden;
+}
+
+/* Mobile shell */
+.mobile-screen {
+  background-color: #E9EFF8;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.mobile-screen::-webkit-scrollbar { display: none; }
+
+/* Animations */
+@keyframes slideUp {
+  from { transform: translateY(24px); opacity: 0; }
+  to   { transform: translateY(0);    opacity: 1; }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes ping-badge {
+  0%, 100% { transform: scale(1);   opacity: 1; }
+  50%       { transform: scale(1.6); opacity: 0; }
+}
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position:  200% 0; }
+}
+
+.animate-slide-up  { animation: slideUp 0.35s ease-out both; }
+.animate-fade-in   { animation: fadeIn  0.25s ease-out both; }
+.robot-ping        { animation: ping-badge 1.8s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+
+/* Semáforo glow */
+.glow-red    { box-shadow: 0 0 12px rgba(239,68,68,0.5);  }
+.glow-yellow { box-shadow: 0 0 12px rgba(234,179,8,0.5);  }
+.glow-green  { box-shadow: 0 0 12px rgba(23,198,83,0.5);  }
+
+/* Bottom nav active */
+.nav-active svg { stroke: #17C653; }
+.nav-active span { color: #17C653; }
+
+/* Card shadow */
+.card { background: #fff; border-radius: 16px; box-shadow: 0 2px 12px rgba(26,37,64,0.08); }
+
+/* Scrollbar hide for chat */
+.chat-scroll { overflow-y: auto; scrollbar-width: none; }
+.chat-scroll::-webkit-scrollbar { display: none; }
+
+/* Progress bar */
+.progress-bar {
+  background: linear-gradient(90deg, #17C653, #13A845);
+  border-radius: 99px;
+  transition: width 0.6s ease;
+}
+.progress-bar-gold {
+  background: linear-gradient(90deg, #C9A760, #a8883d);
+  border-radius: 99px;
+}
+
+/* Shimmer for skeleton */
+.shimmer {
+  background: linear-gradient(90deg, #e2e8f0 25%, #f0f4f8 50%, #e2e8f0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
