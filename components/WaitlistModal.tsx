@@ -1,9 +1,9 @@
 'use client'
 
 import { useState, useEffect, useCallback } from 'react'
+import { useRouter } from 'next/navigation'
 import { track } from '@/lib/analytics'
-
-const FORMSPREE_ID = 'REEMPLAZAR_CON_TU_FORM_ID'
+import { supabase } from '@/lib/supabase'
 
 const benefits = [
   'Acceso prioritario al lanzamiento',
@@ -12,7 +12,10 @@ const benefits = [
 ]
 
 export default function WaitlistModal() {
+  const router = useRouter()
   const [open, setOpen] = useState(false)
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState<string | null>(null)
 
   const close = useCallback(() => setOpen(false), [])
 
@@ -77,9 +80,32 @@ export default function WaitlistModal() {
 
         {/* Formulario */}
         <form
-          action={`https://formspree.io/f/${FORMSPREE_ID}`}
-          method="POST"
-          onSubmit={() => track('waitlist_signup', { source: 'modal' })}
+          onSubmit={async (e) => {
+            e.preventDefault()
+            setLoading(true)
+            setError(null)
+            const form = e.currentTarget
+            const name = (form.elements.namedItem('name') as HTMLInputElement).value
+            const email = (form.elements.namedItem('email') as HTMLInputElement).value
+
+            track('waitlist_signup', { source: 'modal' })
+
+            const { error: dbError } = await supabase
+              .from('waitlist_signups')
+              .insert({ name, email, source: 'modal' })
+
+            if (dbError) {
+              setLoading(false)
+              if (dbError.code === '23505') {
+                setError('Este correo ya está en la lista.')
+              } else {
+                setError('Algo salió mal. Intenta de nuevo.')
+              }
+              return
+            }
+
+            router.push('/gracias')
+          }}
           className="flex flex-col gap-3"
         >
           <input
@@ -96,11 +122,15 @@ export default function WaitlistModal() {
             placeholder="tu@correo.com"
             className="w-full px-4 py-3.5 rounded-xl border border-border bg-bg text-text-main placeholder:text-text-muted text-sm focus:outline-none focus:ring-2 focus:ring-accent"
           />
+          {error && (
+            <p className="text-sm text-red-500 text-center">{error}</p>
+          )}
           <button
             type="submit"
-            className="w-full bg-accent hover:bg-accent-hover text-white font-bold py-3.5 rounded-xl text-sm transition-colors duration-150 shadow-md shadow-accent/20"
+            disabled={loading}
+            className="w-full bg-accent hover:bg-accent-hover text-white font-bold py-3.5 rounded-xl text-sm transition-colors duration-150 shadow-md shadow-accent/20 disabled:opacity-60"
           >
-            Quiero acceso anticipado
+            {loading ? 'Guardando...' : 'Quiero acceso anticipado'}
           </button>
         </form>
 

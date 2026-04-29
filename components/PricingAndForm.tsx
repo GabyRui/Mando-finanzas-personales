@@ -1,7 +1,9 @@
 'use client'
 
 import { useState } from 'react'
+import { useRouter } from 'next/navigation'
 import { track } from '@/lib/analytics'
+import { supabase } from '@/lib/supabase'
 
 // ─── Datos de planes ────────────────────────────────────────────────────────
 
@@ -121,23 +123,42 @@ function Pricing({
 
 // ─── WaitlistForm ─────────────────────────────────────────────────────────────
 
-const FORMSPREE_ID = 'REEMPLAZAR_CON_TU_FORM_ID' // ← reemplazar en formspree.io
-
 const planLabels: Record<string, string> = {
   plan_free: 'Gratis — S/ 0/mes',
   plan_pro: 'Mando Pro — S/ 15/mes',
 }
 
 function WaitlistForm({ selectedPlan }: { selectedPlan: string | null }) {
-  const [submitted, setSubmitted] = useState(false)
+  const router = useRouter()
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState<string | null>(null)
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    track('waitlist_signup', {
-      plan: selectedPlan ?? 'sin_plan',
-      source: 'landing',
-    })
-    // Formspree maneja el redirect a /gracias
-    // No hacemos preventDefault — dejamos que el form haga submit normal
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    setLoading(true)
+    setError(null)
+
+    const form = e.currentTarget
+    const email = (form.elements.namedItem('email') as HTMLInputElement).value
+    const plan = selectedPlan ?? 'sin_plan'
+
+    track('waitlist_signup', { plan, source: 'landing' })
+
+    const { error: dbError } = await supabase
+      .from('waitlist_signups')
+      .insert({ email, plan, source: 'landing' })
+
+    if (dbError) {
+      setLoading(false)
+      if (dbError.code === '23505') {
+        setError('Este correo ya está en la lista.')
+      } else {
+        setError('Algo salió mal. Intenta de nuevo.')
+      }
+      return
+    }
+
+    router.push('/gracias')
   }
 
   return (
@@ -165,14 +186,7 @@ function WaitlistForm({ selectedPlan }: { selectedPlan: string | null }) {
         </p>
       )}
 
-      <form
-        action={`https://formspree.io/f/${FORMSPREE_ID}`}
-        method="POST"
-        onSubmit={handleSubmit}
-        className="flex flex-col gap-3"
-      >
-        <input type="hidden" name="plan" value={selectedPlan ?? 'sin_plan'} />
-
+      <form onSubmit={handleSubmit} className="flex flex-col gap-3">
         <input
           type="email"
           name="email"
@@ -181,11 +195,16 @@ function WaitlistForm({ selectedPlan }: { selectedPlan: string | null }) {
           className="w-full px-4 py-3.5 rounded-xl border border-border bg-surface text-text-main placeholder:text-text-muted text-sm focus:outline-none focus:ring-2 focus:ring-accent"
         />
 
+        {error && (
+          <p className="text-sm text-red-500 text-center">{error}</p>
+        )}
+
         <button
           type="submit"
-          className="w-full bg-accent hover:bg-accent-hover text-white font-semibold py-3.5 rounded-xl text-sm transition-colors duration-150"
+          disabled={loading}
+          className="w-full bg-accent hover:bg-accent-hover text-white font-semibold py-3.5 rounded-xl text-sm transition-colors duration-150 disabled:opacity-60"
         >
-          Quiero acceso anticipado
+          {loading ? 'Guardando...' : 'Quiero acceso anticipado'}
         </button>
       </form>
 
